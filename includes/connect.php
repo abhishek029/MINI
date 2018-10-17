@@ -11,19 +11,32 @@
         exit;
     }
     
-    //make query
-    $myQuery = "select * from mainmodel";
+    // //make query
+    // $myQuery = "select * from mainmodel";
 
-    // get the result
-    $result = mysqli_query($conn, $myQuery);
+    // // get the result
+    // $result = mysqli_query($conn, $myQuery);
 
-    $rows = array();
+    // $rows = array();
 
-    while($row =mysqli_fetch_assoc($result)){
-        $rows[] = $row;
+    // while($row =mysqli_fetch_assoc($result)){
+    //     $rows[] = $row;
         
-    }
+    // }
 
+    if (isset($_GET["carModel"])){
+        $car = $_GET["carModel"];
+
+        $myQuery = "SELECT * FROM mainmodel WHERE model = '$car'";
+
+        $result = mysqli_query($conn, $myQuery);
+
+        $rows = array();
+
+        while($row = mysqli_fetch_assoc($result)){
+            $rows[] = $row;
+        }
+    }
     //send entire result as a json encode array
     echo json_encode($rows);
 ?>
