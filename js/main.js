@@ -5,7 +5,9 @@
         data : {
             modelName:"",
             modelDetails:"",
-            carModel:""
+            carModel:"",
+
+            videosrc : "mini_1"
         },
         mounted: function(){
             console.log('mounted');
@@ -26,6 +28,15 @@
             },1000)
         },
         methods:{
+
+            volOn(e){
+                console.log('moused over video');
+                e.currentTarget.muted = false;
+            },
+            volOff(e){
+                console.log('mouse hover off');
+                e,currentTarget.muted = true;
+            },
             addPreloader(patentE){
                 parentEl.appendChild(document.querySelector('.preloader-wrapper'));
 
@@ -58,6 +69,6 @@
 
     })
 
-    cars.forEach(cars => cars.addEventListener("click", fetchData))
-    fetchData();
+    // cars.forEach(cars => cars.addEventListener("click", fetchData))
+    // fetchData();
 })();
