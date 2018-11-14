@@ -1,18 +1,47 @@
 (() =>{
-    const cars = document.querySelectorAll('.data-ref');
-    
-    function fetchData(){
-        fetch(`./includes/connect.php?carModel=${this.id}`)
-        .then(res => res.json())
-        .then(data => {
-            console.log(data);
-            parseCarData(data[0]);
-        })
-        .catch(function(error){
-            console.error(error);
-        });
+    const vm = new IDBCursorWithValue({
+        el:"#app",
 
-    }
+        data : {
+            modelName:"",
+            modelDetails:"",
+            carModel:""
+        },
+        mounted: function(){
+            console.log('mounted');
+
+            document.querySelector("#F55").click();
+        },
+        update: function(){
+            console.log("updated");
+        },
+        methods:{
+            fetchData(e){
+                let targetURL = e.currentTarget.id;
+                fetch(`./includes/connect.php?carModel=${targetURL}`)
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data);
+                    // parseCarData(data[0]);
+                    const{modelName,pricing,modelDetails} = data[0];
+                    this.modelName = modelName;
+                    this.pricing = pricingl
+                    this.modelDetails = modelDetails;
+                    
+                })
+                .catch(function(error){
+                    console.error(error);
+                });
+            }
+
+        }
+
+    })
+
+
+
+
+
 
     function parseCarData(car){
         //debugger;
